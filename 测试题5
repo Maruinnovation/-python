@@ -1,0 +1,42 @@
+import operator
+NLH = input()
+NLH = NLH.split(' ')
+N = int(NLH[0])
+L = int(NLH[1])
+H = int(NLH[2])
+Grades_1,Grades_2,Grades_3,Grades_4,Grades_5 = [],[],[],[],[]
+for i in range(N):
+    student = input()
+    student = student.split(' ')
+    student_grade = {'学号':int(student[0]),'德分':int(student[1]),
+                     '才分':int(student[2])}
+    student_grade['总分'] = int(student[1])+int(student[2])
+    if int(student[1]) >= H and int(student[2]) >= H:
+        student_grade['label'] = '德才兼备'
+        Grades_1.append(student_grade)
+    elif int(student[1]) >= H and int(student[2]) >= L:
+        student_grade['label'] = '德胜才'
+        Grades_2.append(student_grade)
+    elif (int(student[1]) >= L and int(student[2]) >= L and 
+          int(student[1]) >= int(student[2])):
+        student_grade['label'] = '德才兼芒'
+        Grades_3.append(student_grade)
+    elif int(student[1])>= L and int(student[2])>=L:
+        student_grade['label'] = '刚过线'
+        Grades_4.append(student_grade)
+    else:
+        student_grade['label'] = '未过线'
+        Grades_5.append(student_grade)
+sorted_1 = sorted(Grades_1, key=operator.itemgetter('总分','德分','学号'),reverse=True)
+sorted_2 = sorted(Grades_2, key=operator.itemgetter('总分','德分','学号'),reverse=True)
+sorted_3 = sorted(Grades_3, key=operator.itemgetter('总分','德分','学号'),reverse=True)
+sorted_4 = sorted(Grades_4, key=operator.itemgetter('总分','德分','学号'),reverse=True)
+print(str(len(Grades_1)+len(Grades_2)+len(Grades_3)+len(Grades_4)))
+for item in sorted_1:
+    print(item['学号'],item['德分'],item['才分'])
+for name in sorted_2:
+    print(item['学号'],item['德分'],item['才分'])
+for name in sorted_3:
+    print(item['学号'],item['德分'],item['才分'])
+for name in sorted_4:
+    print(item['学号'],item['德分'],item['才分'])
